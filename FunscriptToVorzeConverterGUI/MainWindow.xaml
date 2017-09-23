@@ -1,0 +1,173 @@
+﻿<Window x:Class="FunscriptToVorzeConverterGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FunscriptToVorzeConverterGUI"
+        mc:Ignorable="d"
+        Title="Converter" Height="350" Width="525">
+    <Window.Resources>
+        <AlternationConverter x:Key="AlternationConverter"/>
+    </Window.Resources>
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource BGMainMenu}"/>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Content="?" Width="20" Height="20" Background="#FFB24040" BorderBrush="{x:Null}" BorderThickness="0">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource BGBrightMenu}"/>
+            </Button.Foreground>
+        </Button>
+        <Grid IsEnabled="{Binding !IsChecked, ElementName=ConvertAllCheckbox}" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="30" ToolTip="The funscript file goes here" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="InputTextBox" Text="Input File" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <TextBox.Background>
+                        <SolidColorBrush Color="{DynamicResource BGBrightMenu}"/>
+                    </TextBox.Background>
+                </TextBox>
+                <Button x:Name="ChooseInputButton" Content="Choose" Grid.Column="1" BorderThickness="0" BorderBrush="{x:Null}" Click="ChooseInputButton_Click" >
+                    <Button.Foreground>
+                        <SolidColorBrush Color="{DynamicResource Accent}"/>
+                    </Button.Foreground>
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource BGSecondary}"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1" Margin="30" ToolTip="Choose wisely, or the earth will explode!" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="OutputTextBox" Text="Output File" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <TextBox.Background>
+                        <SolidColorBrush Color="{DynamicResource BGBrightMenu}"/>
+                    </TextBox.Background>
+                </TextBox>
+                <Button x:Name="ChooseOutputButton" Content="Choose" Grid.Column="1" BorderThickness="0" BorderBrush="{x:Null}" Click="ChooseOutputButton_Click" >
+                    <Button.Foreground>
+                        <SolidColorBrush Color="{DynamicResource Accent}"/>
+                    </Button.Foreground>
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource BGSecondary}"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Margin="10" ToolTip="Needed for some math. This will directly affect intensity. You are advised, to use a period, instead of a comma, computers are weird like that o.O" >
+                    <Grid.Background>
+                        <SolidColorBrush Color="{DynamicResource BGSecondary}"/>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Multiplicator" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <Label.Foreground>
+                            <SolidColorBrush Color="{DynamicResource Accent}"/>
+                        </Label.Foreground>
+                    </Label>
+                    <Grid Grid.Column="1" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="MultiTextBox" Text="2.4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0,0,1,0">
+                            <TextBox.Background>
+                                <SolidColorBrush Color="{DynamicResource BGBrightMenu}"/>
+                            </TextBox.Background>
+                        </TextBox>
+                        <Button x:Name="ResetMultiButton" Content="U" Grid.Column="1" FontFamily="Wingdings 2" FontSize="20" BorderThickness="1,0,0,0" Click="ResetMultiButton_Click" >
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource BGBrightMenu}"/>
+                            </Button.Background>
+                        </Button>
+                    </Grid>
+                </Grid>
+                <Grid Margin="10" Grid.Row="1" ToolTip="minimum time between rotation changes" >
+                    <Grid.Background>
+                        <SolidColorBrush Color="{DynamicResource BGSecondary}"/>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Safezone" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <Label.Foreground>
+                            <SolidColorBrush Color="{DynamicResource Accent}"/>
+                        </Label.Foreground>
+                    </Label>
+                    <Grid Grid.Column="1" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="SafezoneTextBox" Text="300" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0,0,1,0">
+                            <TextBox.Background>
+                                <SolidColorBrush Color="{DynamicResource BGBrightMenu}"/>
+                            </TextBox.Background>
+                        </TextBox>
+                        <Button x:Name="ResetSafezoneButton" Content="U" Grid.Column="1" FontFamily="Wingdings 2" FontSize="20" BorderThickness="1,0,0,0" Click="ResetSafezoneButton_Click" >
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource BGBrightMenu}"/>
+                            </Button.Background>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <CheckBox x:Name="ConvertAllCheckbox" Content="Convert Everything in this Folder" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="10" ToolTip="every funscript in the folder containing this application will be converted" >
+                    <CheckBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1.2" ScaleX="1.2"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </CheckBox.RenderTransform>
+                    <CheckBox.Foreground>
+                        <SolidColorBrush Color="{DynamicResource Accent}"/>
+                    </CheckBox.Foreground>
+                    <CheckBox.Background>
+                        <SolidColorBrush Color="{DynamicResource BGBrightMenu}"/>
+                    </CheckBox.Background>
+                </CheckBox>
+                <Button x:Name="StartButton" Content="Start" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10" BorderBrush="{x:Null}" BorderThickness="0" ToolTip="Instantly kills all nazi's" Click="StartButton_Click" >
+                    <Button.Foreground>
+                        <SolidColorBrush Color="{DynamicResource Accent}"/>
+                    </Button.Foreground>
+                    <Button.Background>
+                        <SolidColorBrush Color="{DynamicResource BGSecondary}"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
